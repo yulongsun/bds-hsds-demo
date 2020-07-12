@@ -1,0 +1,11 @@
+﻿//#!/usr/bin/env node
+
+
+var app;
+if (process.env.NODE_ENV == "production") { //需要在生产环境中(10.0.0.99)设置环境变量 NODE_ENV
+    app = require('../src/app/index');
+}
+else {
+    app = require('../dist/src/app/index');
+}
+

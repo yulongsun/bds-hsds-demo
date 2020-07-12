@@ -1,0 +1,39 @@
+{
+  "name": "demo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dilight.js": "0.0.2",
+    "got": "^11.5.0",
+    "mocha": "^8.0.1",
+    "path": "^0.12.7",
+    "routing-controllers": "^0.7.7",
+    "rxjs": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.7",
+    "@types/got": "^9.6.11",
+    "@types/mocha": "^7.0.2",
+    "@types/should": "^13.0.0",
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4",
+    "reflect-metadata": "^0.1.13",
+    "should": "^13.2.3",
+    "ts-md5": "^1.2.7",
+    "typescript": "^3.9.5"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "npm run watch-debug",
+    "watch-ts": "tsc -w",
+    "www-debug": "nodemon --inspect bin/www",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\"  \"npm run watch-ts\" \"npm run www-debug\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "yulongsun",
+    "email": "yulongsun@163.com"
+  },
+  "license": "ISC"
+}

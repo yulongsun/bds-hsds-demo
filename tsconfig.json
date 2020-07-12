@@ -1,0 +1,35 @@
+{
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "./dist/src",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "target": "es5",
+        "strictNullChecks": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "inlineSources": false,
+        "lib": [
+            "es2015"
+        ]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+
+    "include": [
+        "**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "static"
+    ]
+}
