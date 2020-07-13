@@ -1,6 +1,6 @@
 import 'mocha';
 import * as should from 'should'
-import { BdsApiController }from '../udocconfig/control'
+import { BdsApiController } from '../udocconfig/control'
 
 import { RtnType, CWebProcessData, CWebDataTypeItemInfo, ResultSet, ResultModelRaw } from '../app/_def/bds-meta'
 
@@ -27,18 +27,20 @@ describe('BdsApiController', function () {
     it('ModelData', async function () {
 
         let dt = new Date("2018-06-28T11:00:00.000Z");
-        let ret: RtnType<ResultSet> = await contrl.ModelData(uuid, region, prefix, dt);
-     //   should(ret.result).be.greaterThan(0);
+        let ret: RtnType<ResultSet> = await contrl.ModelData(uuid, region, prefix, dt.toJSON());
+
+        //todo:因为数据量太在，目前没有数据，
+        //  should(ret.result).be.greaterThan(0);
     });
 
 
-///100663412  rrList
+    ///100663412  rrList
     //全流域时间点数据
     it('ModelElm', async function () {
         let elmi = 0;
         let itemid = 67109137;
         let seci = 0;
-        let model: RtnType<CWebProcessData> = await contrl.ModelElm(uuid, region, prefix, itemid, seci, elmi,'Cell');
+        let model: RtnType<CWebProcessData> = await contrl.ModelElm(uuid, region, prefix, itemid, seci, elmi, 'Cell');
         should(model.result).be.greaterThan(0);
 
     });

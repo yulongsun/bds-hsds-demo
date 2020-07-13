@@ -8,7 +8,7 @@ import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';
 
 
 
-const region = 20;
+const region = 20;  //
 const contrl = new BdsApiController()
 
 
@@ -17,10 +17,10 @@ describe('BdsApiController', async function () {
 
     //http://localhost:8890/bdsapi/listIdleTask?region=20&prefix=里下河实时预报
     it('getTaskTmpl', async function () {
-        let prefix = '里下河流裁域';
+        let configs :DocConfig[]= (await contrl.udocconfig(region)).data;
+        let prefix = configs[0].subjectSeries.mPlanName;
         let ret = await contrl.getTaskTmpl(region, prefix);
-        let length = ret.result;
-        should(length).be.greaterThanOrEqual(0);
+        should(ret.data).be.Array();
 
     });
 

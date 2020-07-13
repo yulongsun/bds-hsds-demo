@@ -419,3 +419,17 @@ export class PreLoad {
     */
 
 }
+
+
+
+export async function bdscall( apiname:string,  param:{[key: string]: string | number | boolean | null | undefined}) {
+
+    let preloader = new PreLoad()
+    let url = `${preloader.getUDocUrl()}${apiname}`;
+    let response = await got(url, {
+        searchParams: param,
+        timeout: 2000
+    })
+    let ret = JSON.parse(response.body);
+    return ret;
+}

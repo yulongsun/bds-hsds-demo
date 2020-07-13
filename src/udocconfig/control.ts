@@ -3,20 +3,19 @@ import { TaskStrategy, RESULTNAME, JTYPE, RtnType, OutputSch, CWebDataTypeItemIn
  } from '../app/_def/bds-meta';
 import { IdleTask, DbTaskType, IdleTaskType, TaskType } from '../app/_def/redis-def';
 import { ProcessData, ProcessInfoData } from '../app/_core/_data';
-import got from 'got';
+
 import { Controller, Param, QueryParam, Body, Get, Post, Put, Delete } from "routing-controllers";
-import { PreLoad } from './preload';
+import { PreLoad ,bdscall} from './preload';
 import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';
+
+
+
 
 
 
 
 //@Controller("/bdsapi") //
 export class BdsApiController {
-
-
-
-
     /**
      * 请求：从配置文件中得到系经运行的配置信息，、
      * 返回 :配置信息
@@ -24,20 +23,8 @@ export class BdsApiController {
     @Get("/udocconfig")
     async udocconfig(
         @QueryParam("region") region?: number,//流域id  
-
     ): Promise<RtnType<DocConfig[]>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}udocconfig`;
-        let response = await got(url)
-        let ret = JSON.parse(response.body) as RtnType<DocConfig[]>;
-        if (region) {
-            ret.data = ret.data.filter(x => {
-                return x.udoc.region == region;
-
-            })
-
-        }
-        return ret;
+        return bdscall('udocconfig', { region });
     }
 
 
@@ -54,18 +41,10 @@ export class BdsApiController {
     async getTaskList(
         @QueryParam("region") region: number,//流域id
         @QueryParam("prefix") prefix: string,//流域方案。如里下河实时预报、  突发满天飞染...
-      @QueryParam("page") page: number=0,   //大数据量返回时会有出错
+        @QueryParam("page") page: number = 0,   //大数据量返回时会有出错
     ): Promise<RtnType<DbTaskType[]>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}getTaskList`;
-        let response = await got(url, {
-            searchParams: { region, prefix,page },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('getTaskList', { region, prefix, page });
     }
-
 
 
     /*
@@ -78,16 +57,8 @@ export class BdsApiController {
         @QueryParam("prefix") prefix?: string,//流域方案。如里下河实时预报、  突发满天飞染...
 
     ): Promise<RtnType<IdleTaskType>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}getLatestTask`;
-        let response = await got(url, {
-            searchParams: { region, prefix },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('getLatestTask', { region, prefix });
     }
-
 
 
 
@@ -102,17 +73,8 @@ export class BdsApiController {
         @QueryParam("prefix") prefix: string,//流域方案。如里下河实时预报、  突发满天飞染...
 
     ): Promise<RtnType<DbTaskType[]>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}getTaskTmpl`;
-        let response = await got(url, {
-            searchParams: { region, prefix },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('getTaskTmpl', { region, prefix });
     }
-
-
 
 
 
@@ -128,14 +90,7 @@ export class BdsApiController {
 
     ): Promise<RtnType<TaskFeature>> {
 
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}DataFeature`;
-        let response = await got(url, {
-            searchParams: { region, taskgrp,keyid },
-            timeout: 10000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('DataFeature', { region, taskgrp,keyid });
     }
 
 
@@ -148,15 +103,7 @@ export class BdsApiController {
         @QueryParam("uuid") uuid: string, //任务id
         @QueryParam("region") region: number,  //流域id
     ): Promise<RtnType<OutputSch>> {
-
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}OutputSch`;
-        let response = await got(url, {
-            searchParams: { uuid, region, },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('OutputSch', { uuid, region});
     }
 
 
@@ -169,14 +116,7 @@ export class BdsApiController {
         @QueryParam("uuid") uuid: string, //流域id
         @QueryParam("region") region: number,  //流域id
     ) {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}Predict`;
-        let response = await got(url, {
-            searchParams: { uuid, region, },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('Predict', { uuid, region });
     }
 
 
@@ -191,15 +131,7 @@ export class BdsApiController {
         @QueryParam("region") region: number,  //流域id
         @QueryParam("keyid") keyid?: number, //结果分析对像id
     ): Promise<RtnType<ProcessInfoData[]>> {
-
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}Preset`;
-        let response = await got(url, {
-            searchParams: { uuid, region, keyid},
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('Preset', { uuid, region,keyid });
     }
 
 
@@ -214,17 +146,10 @@ export class BdsApiController {
         @QueryParam("uuid") uuid: string,   //任务id
         @QueryParam("region") region: number,  //流域id
         @QueryParam("prefix") prefix: string, //流域.方案。如里下河实时预报、  突发满天飞染...
-        @QueryParam("dt") dt: Date,           //时段点
+        @QueryParam("dt") dt: string,           //时段点, Date.toJSON()
 
     ): Promise<RtnType<ResultSet>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}ModelData`;
-        let response = await got(url, {
-            searchParams: { uuid, region, prefix, dt:dt.toJSON() },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('ModelData', { uuid, region,prefix, dt});
     }
 
 
@@ -241,14 +166,7 @@ export class BdsApiController {
         @QueryParam("itemid") itemid: number, //河道id
         @QueryParam("seci") seci: number,   //断面id
     ): Promise<RtnType<CWebDataTypeItemInfo[]>> {
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}ResultTypeList`;
-        let response = await got(url, {
-            searchParams: { uuid, region, prefix, itemid, seci },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+          return bdscall('ResultTypeList', { uuid, region,prefix, itemid,seci});
 
     }
 
@@ -268,14 +186,7 @@ export class BdsApiController {
 
     ): Promise<RtnType<CWebProcessData>> {
 
-        let preloader = new PreLoad()
-        let url = `${preloader.getUDocUrl()}ModelElm`;
-        let response = await got(url, {
-            searchParams: { uuid, region, prefix, itemid, seci, elmi, resulset },
-            timeout: 2000
-        })
-        let ret = JSON.parse(response.body);
-        return ret;
+        return bdscall('ModelElm', { uuid, region, prefix, itemid, seci,elmi,resulset });
     }
 
 

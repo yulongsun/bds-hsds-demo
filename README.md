@@ -1,20 +1,24 @@
 
 
 
-## 数字流域  hushuidataserver  调用演示程序
+## 数字流域  hushuidataserver  调用演示(bds-hsds-demo)程序
 
 
-ModelSch
-OutputSch
+github 地址
+     https://github.com/yulongsun/bds-hsds-demo.git 
 
 
 私有npm 地址(publish to)
 
-    http://39.108.69.210:4873/-/web/detail/bds-cloudrest
+   http://www.hhunj.com:8445/r/bds-hsds-demo.git 
 
-git 地址
 
-    http://www.hhunj.com:8445/r/cloudrest.git
+### 采用数字流域数据库
+
+
+
+  #### 数字流域文档
+
 
 
 ### 内容
