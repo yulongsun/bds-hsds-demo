@@ -1,7 +1,7 @@
 
 import 'mocha';
 import * as should from 'should'
-import { BdsApiController }from '../udocconfig/control'
+import { BdsApiController }from '../udocconfig/bdsapi-control'
 
 import { RtnType,CWebProcessData,CWebDataTypeItemInfo, ResultSet, ResultModelRaw } from '../app/_def/bds-meta';
 

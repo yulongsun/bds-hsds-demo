@@ -9,18 +9,14 @@ import got from 'got';
 import { from, range, concat, Observable } from 'rxjs';
 import { delay, map, concatAll } from 'rxjs/operators';
 import { BdsHelper } from '../app/_utils/bdshelper';
-//import { StorageTool } from '../app/service/storagetool';
 
 
-
-
-//从环境中获取
 
 
 const defaul_preload: PreLoadType = {
-    //  udocapi: 'http://www.hhunj.com:8890/bdsapi/', //8890 路由转 10.0.0.10:8899, 不同的任具有不同的
-    udocapi: 'http://39.108.69.210:8899/bdsapi/',  //实验数据
-    region: 190,
+    udocapi: 'http://39.108.69.210:8899/bdsapi/',  //模型接口地址
+    mapapi: 'https://hhunjpub.oss-cn-shenzhen.aliyuncs.com/ysun_web/mapconfig/',  //地图接口地址
+    region: 20,
 }
 
 
@@ -49,9 +45,13 @@ export class PreLoad {
         this._preload = pre;
     }
 
-
+//文档云服务的地址
     getUDocUrl(): string {
         return this.preload.udocapi;
+    }
+    //地图云服和的地址
+    getMapUrl(): string {
+        return this.preload.mapapi;
     }
 
 

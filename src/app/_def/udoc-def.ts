@@ -256,6 +256,7 @@ export interface DocConfig {
 
 export type PreLoadType ={
   udocapi:string;
+  mapapi:string;
   region:number;
 
 }

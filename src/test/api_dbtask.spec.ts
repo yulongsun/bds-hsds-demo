@@ -1,7 +1,7 @@
 
 import 'mocha';
 import * as should from 'should'
-import { BdsApiController } from '../udocconfig/control'
+import { BdsApiController } from '../udocconfig/bdsapi-control'
 import { IdleTask, HydroType, RedisMsgResult, IdleTaskType, DbTaskType, TaskType } from '../app/_def/redis-def';
 import { DataFeature, RtnType, ResultModelRaw } from '../app/_def/bds-meta'
 import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';

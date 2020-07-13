@@ -1,38 +1,32 @@
 import 'mocha';
 import * as should from 'should'
-import { BdsApiController }from '../udocconfig/control'
+import { BdsApiController } from '../udocconfig/bdsapi-control'
 
 
 
-describe('BdsApiController',  function () {
+describe('BdsApiController', function () {
     let region = 20;
-
+    let contrl = new BdsApiController()
 
 
     it('OutputSch', async function () {
-        let contrl = new BdsApiController()
+
         let task = (await contrl.getLatestTask(region)).data;
         let model = await contrl.OutputSch(task.uuid, region);
-      
         let ssss = model;
 
     });
 
 
-
-
     it('Preset', async function () {
-        let contrl = new BdsApiController()
         let task = (await contrl.getLatestTask(region)).data;
-
-
         let model = await contrl.Preset(task.uuid, region);
         let aa = model.data;
         should(aa.length).be.greaterThan(1);
 
 
-      //  let id = 8986   //name:"红星河水位"
-     
+        //  let id = 8986   //name:"红星河水位"
+
 
         let data = model.data[0].data.mData;
         let info = model.data[0].info;
@@ -40,7 +34,7 @@ describe('BdsApiController',  function () {
             return x.info.mKeyID;
         })
 
-       // should(keyids.indexOf(id) >= 0).be.True();
+        // should(keyids.indexOf(id) >= 0).be.True();
         should(data.length).be.greaterThan(1);
         should(model.result).be.greaterThan(0);
     });

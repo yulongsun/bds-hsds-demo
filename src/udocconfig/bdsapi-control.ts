@@ -1,24 +1,22 @@
 
-import { TaskStrategy, RESULTNAME, JTYPE, RtnType, OutputSch, CWebDataTypeItemInfo, CWebProcessData, ResultSet, TaskFeature, 
- } from '../app/_def/bds-meta';
+import {  RESULTNAME,  RtnType, OutputSch, CWebDataTypeItemInfo, CWebProcessData, ResultSet, TaskFeature, } from '../app/_def/bds-meta';
 import { IdleTask, DbTaskType, IdleTaskType, TaskType } from '../app/_def/redis-def';
 import { ProcessData, ProcessInfoData } from '../app/_core/_data';
 
-import { Controller, Param, QueryParam, Body, Get, Post, Put, Delete } from "routing-controllers";
+import { Controller,  QueryParam, Body, Get, Post, Put, Delete } from "routing-controllers";
 import { PreLoad ,bdscall} from './preload';
-import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';
+import { DocConfig, StorageConfig } from '../app/_def/udoc-def';
 
 
 
 
-
-
-
-//@Controller("/bdsapi") //
+@Controller("/bdsapi") //
 export class BdsApiController {
     /**
      * 请求：从配置文件中得到系经运行的配置信息，、
      * 返回 :配置信息
+     * http://39.108.69.210:8899/bdsapi/udocconfig?region=20
+     *
      */
     @Get("/udocconfig")
     async udocconfig(
@@ -30,12 +28,11 @@ export class BdsApiController {
 
 
 
-
-//http://39.108.69.210:8899/bdsapi/getTaskList?region=20&prefix=里下河实时预报
     /**
      * 
-    请求：读取任务列表
-    返回:  任务列表的集合
+     * 请求：读取任务列表
+     * 返回:  任务列表的集合
+    / * 示例：http://39.108.69.210:8899/bdsapi/getTaskList?region=20&prefix=里下河实时预报
      */
     @Get("/getTaskList")
     async getTaskList(

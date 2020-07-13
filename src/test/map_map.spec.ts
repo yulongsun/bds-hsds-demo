@@ -1,0 +1,46 @@
+import 'mocha';
+import * as should from 'should'
+import { FeatureCollection, MultiPolygon, LineString, GeoJsonObject } from 'geojson';
+import { MapconfigController } from '../../src/udocconfig/mapconfig-control';
+
+
+
+
+
+describe('MapconfigController', function () {
+    let region = 20;
+
+
+    it('预报降雨分区', async function () {
+        let contrl = new MapconfigController()
+        let model = await contrl.mapConfig(region, '预报降雨分区');
+        should(model.features).be.Array();
+
+    });
+
+    it('潮位水位边界', async function () {
+        let contrl = new MapconfigController()
+        let model = await contrl.mapConfig(region, '潮位水位边界');
+       should(model.features).be.Array();
+
+    });
+
+    it('流量边界', async function () {
+        let contrl = new MapconfigController()
+        let model = await contrl.mapConfig(region, '流量边界');
+       should(model.features).be.Array();
+
+    });
+
+    it('可调度工程', async function () {
+        let contrl = new MapconfigController()
+        let model = await contrl.mapConfig(region, '可调度工程');
+       should(model.features).be.Array();
+
+    });
+
+
+
+
+
+})
