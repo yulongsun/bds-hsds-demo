@@ -11,7 +11,7 @@ import { delay, map, concatAll } from 'rxjs/operators';
 import { BdsHelper } from '../app/_utils/bdshelper';
 //import { StorageTool } from '../app/service/storagetool';
 
-bds-hsds-demo
+
 
 
 //从环境中获取

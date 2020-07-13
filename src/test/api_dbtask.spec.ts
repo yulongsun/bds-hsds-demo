@@ -4,13 +4,15 @@ import * as should from 'should'
 import { BdsApiController } from '../udocconfig/control'
 import { IdleTask, HydroType, RedisMsgResult, IdleTaskType, DbTaskType, TaskType } from '../app/_def/redis-def';
 import { DataFeature, RtnType, ResultModelRaw } from '../app/_def/bds-meta'
-
+import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';
 
 
 
 const region = 20;
-
 const contrl = new BdsApiController()
+
+
+
 describe('BdsApiController', async function () {
 
     //http://localhost:8890/bdsapi/listIdleTask?region=20&prefix=里下河实时预报
@@ -18,7 +20,7 @@ describe('BdsApiController', async function () {
         let prefix = '里下河流裁域';
         let ret = await contrl.getTaskTmpl(region, prefix);
         let length = ret.result;
-        should(length).be.greaterThan(0);
+        should(length).be.greaterThanOrEqual(0);
 
     });
 
@@ -42,6 +44,7 @@ it('getLatestTask', async function () {
         should(data.mHydroDtNo).be.equals(ser.mHydroDtNo);
 
         should(length).be.greaterThan(0);
+       
     }
 });
 
@@ -52,9 +55,8 @@ describe('BdsApiController', async function () {
     //http://localhost:8890/bdsapi/listIdleTask?region=20&prefix=里下河实时预报
     it('getTaskList', async function () {
 
-        let prefix = '里下河流裁域';
-
-
+        let configs :DocConfig[]= (await contrl.udocconfig(region)).data;
+        let prefix = configs[0].subjectSeries.mPlanName;
         let ret = await contrl.getTaskList(region, prefix);
         let length = ret.result;
         should(length).be.greaterThan(0);

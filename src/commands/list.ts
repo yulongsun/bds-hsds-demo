@@ -11,7 +11,7 @@ import { DocConfig, StorageConfig } from '../../src/app/_def/udoc-def';
  * 列出ysun_web, ysun_bin,ysun_model....
  * udocapi :  新设置  udocapi
  */
-export =  async function (udocapi?: string, bjson: boolean=false) {
+export =  async function (udocapi?: string, bjson: boolean=false): Promise<  any[] |undefined >{
     let preloader = new PreLoad()
     let urlRoot = preloader.getUDocUrl();
     console.debug('udocapi= ', urlRoot);
@@ -19,21 +19,19 @@ export =  async function (udocapi?: string, bjson: boolean=false) {
     let udocconfig = await preloader.getUdocConfig();
     if (!udocconfig) {
         console.debug('no udocconfig');
-        return
+        return;
     }
 
     if (udocapi) {
         // todo: verify...
         //重设redisapi
         preloader.setUDocRoot(udocapi);
-
         console.debug('redisRoot change to  ', udocapi);
-
-        listInstance(udocconfig, bjson);
+       return  listInstance(udocconfig, bjson);
     }
     else {
 
-        listInstance(udocconfig, bjson);
+       return listInstance(udocconfig, bjson);
     }
 }
 
@@ -41,7 +39,7 @@ export =  async function (udocapi?: string, bjson: boolean=false) {
 
 
 
-function listInstance(udocconfig: DocConfig[], bjson: boolean) {
+function listInstance(udocconfig: DocConfig[], bjson: boolean):any[] {
 
     console.debug('');
     console.debug('');
@@ -75,6 +73,6 @@ function listInstance(udocconfig: DocConfig[], bjson: boolean) {
         let aa = Configs.join('\r\n');
         console.debug(aa);
 
-        return
+        return Configs;
     }
 }

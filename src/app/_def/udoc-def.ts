@@ -246,9 +246,9 @@ export interface DocConfig {
     subjectSeries: SubjectSeries;
     
     flowitems?:Flowitems;
-    getSensorsCat: string[];
-    default_catalog: MapCatalog;
-    inputConfig: InputConfigItem
+    getSensorsCat?: string[];
+    default_catalog?: MapCatalog;
+    inputConfig?: InputConfigItem
 }
 
 
