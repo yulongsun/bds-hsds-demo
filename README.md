@@ -84,6 +84,29 @@ const defaul_preload: PreLoadType = {
 
 
 
+### 编译出错
+
+如果出现以下错误，选中打开 node_modules/got/dist/source/core/index.d.ts 文档，将 
+
+_write(chunk: any, encoding: `BufferEncoding` | undefined, callback: (error?: Error | null) => void): void;
+
+中的 `BufferEncoding` 改为 `string`
+
+
+-----
+`node_modules/got/dist/source/core/index.d.ts`:301:5 - error TS2416: Property '_write' in type 'Request' is not assignable to the same property in base type 'Duplex'.
+  Type '(chunk: any, encoding: "ascii" | "utf8" | "utf-8" | "utf16le" | "ucs2" | "ucs-2" | "base64" | "latin1" | "binary" | "hex" | undefined, callback: (error?: ErrnoException | null | undefined) => void) => void' is not assignable to type '(chunk: any, encoding: string, callback: (error?: Error | null | undefined) => void) => void'.
+    Types of parameters 'encoding' and 'encoding' are incompatible.
+      Type 'string' is not assignable to type '"ascii" | "utf8" | "utf-8" | "utf16le" | "ucs2" | "ucs-2" | "base64" | "latin1" | "binary" | "hex" | undefined'.
+
+301     _write(chunk: any, encoding: BufferEncoding | undefined, callback: (error?: Error | null) => void): void;    
+
+
+Found 1 error.
+
+------
+
+
 
 
 

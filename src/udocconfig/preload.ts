@@ -1,4 +1,4 @@
-import { Dilight, Injectable } from 'dilight.js';
+import {  Injectable } from '../app/_def/serve-def';
 import { PreLoadType,DocConfig, StorageConfig, UserDocType } from '../app/_def/udoc-def';
 
 import { RtnType, SubjectSeries, CWebProcessData, DataFeature } from '../app/_def/bds-meta';
@@ -20,12 +20,9 @@ const defaul_preload: PreLoadType = {
 }
 
 
-
-
-
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable(
+ //   { providedIn: 'root' }
+)
 export class PreLoad {
 
 

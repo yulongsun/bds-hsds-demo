@@ -10,7 +10,7 @@ import { FeatureCollection, MultiPolygon, LineString, GeoJsonObject } from 'geoj
 
 
 
-@Controller("/mapapi") //
+@Controller("/mapapi") 
 export class MapconfigController {
     contrl: BdsApiController
     constructor() {
@@ -20,6 +20,7 @@ export class MapconfigController {
     /**
      * 请求：得到流域的json 地图渲染的geojson文件、
      * 返回 :文件内容
+     * 示例： https://hhunjpub.oss-cn-shenzhen.aliyuncs.com/ysun_web/mapconfig/里下河河网/预报降雨分区.json
      */
     @Get("/geojson")
     async mapConfig(

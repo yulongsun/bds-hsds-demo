@@ -3,7 +3,7 @@ import {  Observable, Subscription, Subscriber, } from 'rxjs';
 import {SubjectSeries, CWebScheduleObjectInfo, CWebPredictDikeDataItem } from '../_def/bds-meta'
 import { Helpers } from '../_utils/helpers';
 import { CtgrStyle } from '../_def/base-def'
-import { Injectable, Injector } from '../_def/serve-def'
+import { Injectable } from '../_def/serve-def'
 
 import {IdleTask,IdleTaskType } from '../_def/redis-def';
 
@@ -380,9 +380,9 @@ export class ConstsSubscrib {
 
 //只有一个 subscribe，后面的 subscribe  取代前面的 subscribeｗ
 //Injectable　仅用于 progressSrv，其它需要 new 一个实列
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable(
+   // { providedIn: 'root' }
+)
 export class SoleSubscrib<T> {
     _subscriber: Subscriber<T>;
     _globalsubscriber: Subscriber<T>;
