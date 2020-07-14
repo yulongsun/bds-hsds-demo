@@ -1,14 +1,13 @@
 import 'mocha';
 import * as should from 'should'
-import { FeatureCollection, MultiPolygon, LineString, GeoJsonObject } from 'geojson';
 import { MapconfigController } from '../../src/udocconfig/mapconfig-control';
-
+import { defaul_preload } from '../udocconfig/preload';
 
 
 
 
 describe('MapconfigController', function () {
-    let region = 20;
+   let region = defaul_preload.region;
 
 
     it('预报降雨分区', async function () {

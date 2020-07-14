@@ -13,10 +13,10 @@ import { BdsHelper } from '../app/_utils/bdshelper';
 
 
 
-const defaul_preload: PreLoadType = {
-    udocapi: 'http://39.108.69.210:8899/bdsapi/',  //模型接口地址
-    mapapi: 'https://hhunjpub.oss-cn-shenzhen.aliyuncs.com/ysun_web/mapconfig/',  //地图接口地址
-    region: 20,
+export const defaul_preload: PreLoadType = {
+    udocapi: 'http://39.108.69.210:8899/bdsapi/',  //模型接口地址，连接到hushuidataserver服务（已建在云上，如果用户需要连接自已的 hushuidataserver服务，修改这里）
+    mapapi: 'https://hhunjpub.oss-cn-shenzhen.aliyuncs.com/ysun_web/mapconfig/',  //地图接口地址连接到mapconfig文件服务（已建在云上，如果用户需要连接自已的 mapconfig服务，修改这里）
+    region: 20,     //当前使用的流域模型是 '里下河河网'，如果需要测试其它流域模型，修改这里，但数据库中必须存在该模型数据
 }
 
 

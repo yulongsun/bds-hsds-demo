@@ -8,9 +8,7 @@ describe('commands', () => {
     //dataserver 服务器增加，
     it('list', async function () {
         let ret = await list();
-
         should(ret).be.Array()
-
     })
 
 })

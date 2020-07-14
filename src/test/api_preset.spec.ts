@@ -1,11 +1,11 @@
 import 'mocha';
 import * as should from 'should'
 import { BdsApiController } from '../udocconfig/bdsapi-control'
-
+import { defaul_preload } from '../udocconfig/preload';
 
 
 describe('BdsApiController', function () {
-    let region = 20;
+   let region = defaul_preload.region;
     let contrl = new BdsApiController()
 
 
