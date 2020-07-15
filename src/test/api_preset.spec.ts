@@ -9,38 +9,45 @@ describe('BdsApiController', function () {
     let contrl = new BdsApiController()
 
 
-    it('OutputSch', async function () {
-
-        let task = (await contrl.getLatestTask(region)).data;
-        let model = await contrl.OutputSch(task.uuid, region);
-        let ssss = model;
-
-    });
-
 
     it('Preset', async function () {
         let task = (await contrl.getLatestTask(region)).data;
         let model = await contrl.Preset(task.uuid, region);
-        let aa = model.data;
-        should(aa.length).be.greaterThan(1);
+        let modeldata = model.data;
+        should(modeldata).be.Array();
+        let zip=modeldata[0].data.zip  //一种按 分钟计时的压缩格式
+        should(zip).be.eql('minite');
 
+        let data = modeldata[0].data.mData;
+        should(data).be.Array();
+        //info
+        let info = modeldata[0].info;
+        should(info).be.Object();
+        should(info.mKeyID).Number();
 
-        //  let id = 8986   //name:"红星河水位"
+        let feature = modeldata[0].feature;
+        should(feature).be.Object();
 
-
-        let data = model.data[0].data.mData;
-        let info = model.data[0].info;
-        let keyids = model.data.map(x => {
+        let keyids = modeldata.map(x => {
             return x.info.mKeyID;
         })
+        should(keyids).be.Array();
 
-        // should(keyids.indexOf(id) >= 0).be.True();
-        should(data.length).be.greaterThan(1);
         should(model.result).be.greaterThan(0);
     });
 
 
 
+
+    it('Preset with keyid', async function () {
+        let task = (await contrl.getLatestTask(region)).data;
+        let keyid = 1551;
+        let model = await contrl.Preset(task.uuid, region, keyid);
+        let data = model.data;
+        should(data.length).be.equal(1);
+
+
+    });
 
 
 

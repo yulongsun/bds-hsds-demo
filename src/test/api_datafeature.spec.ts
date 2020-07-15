@@ -29,7 +29,7 @@ describe('BdsApiController', function () {
 */
 
 
-    it('Feature_keyid', async function () {
+    it('Feature with keyid', async function () {
         let contrl = new BdsApiController();
         
         let task = (await contrl.getLatestTask(region)).data;

@@ -14,9 +14,11 @@ import { FeatureCollection, MultiPolygon, LineString, GeoJsonObject } from 'geoj
 export class MapconfigController {
     contrl: BdsApiController
     constructor() {
-
         this.contrl = new BdsApiController()
     }
+
+
+
     /**
      * 请求：得到流域的json 地图渲染的geojson文件、
      * 返回 :文件内容

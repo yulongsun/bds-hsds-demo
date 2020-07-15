@@ -204,6 +204,7 @@ export class ProcessData {
 export class ProcessInfoData {
     info: CWebPresetResultInfo;
     data: ProcessData;
+    feature: DataFeature;
 
 }
 

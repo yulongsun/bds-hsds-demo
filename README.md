@@ -92,6 +92,7 @@ _write(chunk: any, encoding: `BufferEncoding` | undefined, callback: (error?: Er
 
 
 -----
+
 `node_modules/got/dist/source/core/index.d.ts`:301:5 - error TS2416: Property '_write' in type 'Request' is not assignable to the same property in base type 'Duplex'.
   Type '(chunk: any, encoding: "ascii" | "utf8" | "utf-8" | "utf16le" | "ucs2" | "ucs-2" | "base64" | "latin1" | "binary" | "hex" | undefined, callback: (error?: ErrnoException | null | undefined) => void) => void' is not assignable to type '(chunk: any, encoding: string, callback: (error?: Error | null | undefined) => void) => void'.
     Types of parameters 'encoding' and 'encoding' are incompatible.

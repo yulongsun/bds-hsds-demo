@@ -1,6 +1,8 @@
 
 import {  RESULTNAME,  RtnType, OutputSch, CWebDataTypeItemInfo, CWebProcessData, ResultSet, TaskFeature, } from '../app/_def/bds-meta';
 import { IdleTask, DbTaskType, IdleTaskType, TaskType } from '../app/_def/redis-def';
+import { DataPredictList} from '../app/_def/base-def';
+
 import { ProcessData, ProcessInfoData } from '../app/_core/_data';
 
 import { Controller,  QueryParam, Body, Get, Post, Put, Delete } from "routing-controllers";
@@ -45,8 +47,8 @@ export class BdsApiController {
 
 
     /*
-        请求：最后一个任务
-        返回:  最后一个任务
+    *    请求：最后一个任务
+    *   返回:  最后一个任务
     */
     @Get("/getLatestTask")
     async getLatestTask(
@@ -61,8 +63,8 @@ export class BdsApiController {
 
     /**
      * 
-    请求：读取任务模板
-    返回:  任务模板结构
+    *请求：读取任务模板
+    *返回:  任务模板结构
      */
     @Get("/getTaskTmpl")
     async getTaskTmpl(
@@ -76,8 +78,8 @@ export class BdsApiController {
 
 
     /**
-    请求：一个任务分组中的数据特征值（任务分组可以非常大，特征值用于分析）
-    返回:  一个任务分组中的结果分析对像或预报分析数据特征值
+    *请求：一个任务分组中的数据特征值（任务分组可以非常大，特征值用于分析）
+    *返回:  一个任务分组中的结果分析对像或预报分析数据特征值
      */
     @Get("/DataFeature")
     async DataFeature(
@@ -86,14 +88,13 @@ export class BdsApiController {
         @QueryParam("keyid") keyid?: number, //结果分析对像或预报分析对象id
 
     ): Promise<RtnType<TaskFeature>> {
-
         return bdscall('DataFeature', { region, taskgrp,keyid });
     }
 
 
     /**
-    请求：一个全流域全架构信息
-    返回:  一个全流域全架构信息
+    *请求：一个全流域全架构信息
+    *返回:  一个全流域全架构信息
      */
     @Get("/OutputSch")
     async OutputSch(
@@ -105,26 +106,26 @@ export class BdsApiController {
 
 
     /*
-        请求：结果所有分析对象预见期的数据(或 Predict)
-        返回:  结果所有分析对象的预见期的数据
+     *   请求：结果所有分析对象预见期的数据(或 Predict)
+     *   返回:  结果所有分析对象的数据（预见期的预报值和对应的预见期前实测值）集合，
     */
     @Get("/Predict")
     async Predict(
-        @QueryParam("uuid") uuid: string, //流域id
+        @QueryParam("uuid") uuid: string, //任务id
         @QueryParam("region") region: number,  //流域id
-    ) {
+    ) : Promise< RtnType<DataPredictList>>{
         return bdscall('Predict', { uuid, region });
     }
 
 
 
     /*
-        请求：结果一个分析对象预见期的数据(或 预置值 或 Preset)
-        返回:  结果一个分析对象的预见期的数据
+     *   请求：结果一个分析对象预见期的数据(或 预置值 或 Preset)
+     *   返回:  结果一个分析对象的预见期的数据
     */
     @Get("/Preset")
     async Preset(
-        @QueryParam("uuid") uuid: string,  //流域id
+        @QueryParam("uuid") uuid: string,  //任务id
         @QueryParam("region") region: number,  //流域id
         @QueryParam("keyid") keyid?: number, //结果分析对像id
     ): Promise<RtnType<ProcessInfoData[]>> {
@@ -135,8 +136,8 @@ export class BdsApiController {
 
 
     /**
-    请求：一个时段的模型数据的全流域结果
-    返回:  一个时段的全流域断面结果
+    *请求：一个时段的模型数据的全流域结果
+    *返回:  一个时段的全流域断面结果
      */
     @Get("/ModelData")
     async ModelData(
@@ -152,8 +153,8 @@ export class BdsApiController {
 
 
     /**
-    请求：全流域模型数数据
-    返回: 全流域模型数据的类型列表
+    *请求：全流域模型数数据
+    *返回: 全流域模型数据的类型列表
      */
     @Get("/ResultTypeList")
     async ResultTypeList(
@@ -168,8 +169,8 @@ export class BdsApiController {
     }
 
     /**
-    请求：一个断面的模型数据所有时段结果
-    返回： 一个断面的预见期内所有时段的数据
+    *请求：一个断面的模型数据所有时段结果
+    *返回： 一个断面的预见期内所有时段的数据
      */
     @Get("/ModelElm")
     async ModelElm(
